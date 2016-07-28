@@ -1,0 +1,9 @@
+weather:
+    key: 67f6ea9b91987ea9706f561f9bed7b98
+    latitude: 6.6018
+    longitude: 3.3520
+    units: ca
+quote:
+    url: http://www.brainyquote.com/quotes_of_the_day.html
+fact:
+    url: http://facts.randomhistory.com/
