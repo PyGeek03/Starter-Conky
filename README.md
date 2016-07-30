@@ -19,17 +19,20 @@ This package is needed for parsing yaml files
     sudo apt-get install python-yaml
 ### On Fedora
     sudo yum install python-yaml
+### For Arch Linux
+    sudo pacman -S python2-yaml
 ### Using pip
     sudo pip install pyyaml
 
-## python-forecast.io
-The python wrapper for the forecast.io api
+## python-forecast.io  For All Distros
     sudo pip install python-forecastio
 
 ## BeautiFul Soup
 For scrapping data out of html pages
 ### For Ubuntu
     sudo apt-get install python-bs4
+### FOr Arch Linux
+    sudo pacman -S python-beautifulsoup4
 ### Using pip
     sudo pip install beautifulsoup4
 
@@ -37,12 +40,15 @@ For scrapping data out of html pages
 For parsing html
 ### For Ubuntu
     sudo apt-get install python-lxml
+### FOr Arch Linux
+    sudo pacman -S python-lxml
 ### Using pip
     sudo pip install lxml
 
 
 # Configuration:
 The main configuration is in config.yml (not complete yet)
+Edit co_main co_fact co_quote co_weather and change minimum_size 1366 748 to your laptop screen size
 
 ## Weather
 You will need an api key from [forcast.io](http://forecast.io). Go to <http://https://developer.forecast.io/>, register and you will see the api and the bottom of the page. Copy and paste it in the **config.yml** file.
@@ -56,3 +62,4 @@ Choose the unit, for C and km/h use **ca** and for F and mph use **us**
 To start the theme, just go in its directory and use
     ./start.sh
 After making the files in Scripts/ and start.sh executable
+ "chmod +x start.sh" and do the same for all the scripts in /Scripts folder
