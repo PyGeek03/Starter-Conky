@@ -1,4 +1,5 @@
 #!/usr/bin/python2.7
+
 import re
 import os
 import json
@@ -11,6 +12,7 @@ def readConfiguration():
     config_file = open('config.yml', 'r')
     # now load the yaml
     config = yaml.load(config_file)
+    config_file.close()
     return config
 
 
@@ -63,7 +65,7 @@ def readWeather(config):
 
 def writeWeather(data):
     # open the file for writitng
-    weather_file = open('Downloads/weather.cml', 'w')
+    weather_file = open('/tmp/starter-conky/fact.tmp', 'w')
     # write the weather
     for key in data:
         weather_file.write(key + ':' + str(data[key]) + '\n')
@@ -82,5 +84,3 @@ data['status'] = 'FILLED'
 
 # write the weather
 writeWeather(data)
-
-

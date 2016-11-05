@@ -1,10 +1,7 @@
 #!/usr/bin/python2.7
 
 from bs4 import BeautifulSoup
-from lxml import html
 import requests
-import os
-import datetime
 import yaml
 import re
 
@@ -13,6 +10,7 @@ def readConfiguration():
     config_file = open('config.yml', 'r')
     # now load the yaml
     config = yaml.load(config_file)
+    config_file.close()
     return config
 
 
@@ -20,13 +18,13 @@ def readFact(config):
     # get the quote page
     page = requests.get(config['fact']['url'])
     # make the soup
-    soup = BeautifulSoup(page.text)
+    soup = BeautifulSoup(page.text, "lxml")
 
     # get the fact
     data = dict()
     for i in range(0,1000):
-    data['fact'] = unicode(soup(class_='home-text')[0].text).strip()
-    data['fact'] = re.sub(r'\s+', r' ', data['fact'])
+        data['fact'] = unicode(soup(class_='sliderText')[0].text).strip()
+        data['fact'] = re.sub(r'\s+', r' ', data['fact'])
 
     # lets find the quotes
     return data
@@ -34,7 +32,7 @@ def readFact(config):
 
 def writeFact(data):
     # open the file for writitng
-    fact_file = open('Downloads/fact.cml', 'w')
+    fact_file = open('/tmp/starter-conky/fact.tmp', 'w')
     # write the fact
     fact_file.write('fact:' + data['fact'].encode('utf-8'))
     fact_file.write('\nstatus:' + data['status'])
