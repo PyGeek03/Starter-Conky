@@ -61,3 +61,8 @@ First, make start.sh and all the scripts in Scripts/ executable:
  "chmod +x start.sh" and do the same for all the scripts in /Scripts folder.
 To start the theme, just go to Starter-Conky/ and use the command:
     ./start.sh
+
+# Finish
+If you want to properly finish running this conky script, use this command in Starter-Conky/:
+    ./finish.sh
+This script will cache data currently stored in /tmp/starter-conky into the Cache folder.
