@@ -6,4 +6,4 @@ weather:
 quote:
     url: http://www.brainyquote.com/quotes_of_the_day.html
 fact:
-    url: http://facts.randomhistory.com/
+    url: http://www.factretriever.com/
