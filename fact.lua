@@ -47,7 +47,7 @@ function lineText(text, x, y, size, family, text_ext, font_ext, options)
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- get the extents of the text
   cairo_text_extents(cr, text, text_ext);
@@ -150,7 +150,7 @@ function multiText(text, x, y, width, height, size, family, text_ext, font_ext, 
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- now get the extents
   cairo_text_extents(cr, text, text_ext);
@@ -204,11 +204,11 @@ function lines_from(file)
 end
 
 
--- reads the weather from Downloads/weather.txt
+-- reads the fact from /tmp/starter-conky/fact.tmp
 function readFact()
-    -- read the weather file
+    -- read the fact file
     print('Reading the fact:')
-    fact_file = lines_from('Downloads/fact.cml')
+    fact_file = lines_from('/tmp/starter-conky/fact.tmp')
     -- print the line
     for index, line in pairs(fact_file) do
         _,_,key, value = line:find('([%a%d_]+):(.+)')
@@ -256,10 +256,10 @@ function conky_main(  )
     local minute = tonumber(conky_parse('${time %M}'))
     local second = tonumber(conky_parse('${time %S}'))
 
-    -- if the weather is to be update this time
+    -- if the fact is to be update this time
     local update_fact = false
 
-    -- update the weather every nine minutes
+    -- update the fact every nine minutes
     if (hour * 3600 + minute * 60 + second) % 555  <= 3 then
         update_fact = true
     end
@@ -273,7 +273,7 @@ function conky_main(  )
 
     print('Time since last update (update at 555): ' .. (hour * 3600 + minute * 60 + second) % 555)
 
-    -- read the weather
+    -- read the fact
     if update_fact then
         readFact()
     end

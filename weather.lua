@@ -82,7 +82,7 @@ function lineText(text, x, y, size, family, text_ext, font_ext, options)
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- get the extents of the text
   cairo_text_extents(cr, text, text_ext);
@@ -182,7 +182,7 @@ function multiText(text, x, y, width, height, size, family, text_ext, font_ext, 
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- now get the extents
   cairo_text_extents(cr, text, text_ext);
@@ -236,7 +236,7 @@ function lines_from(file)
 end
 
 
--- reads the weather from Downloads/weather.txt
+-- reads the weather from /tmp/starter-conky/weather.tmp
 function readWeather()
 	-- read the weather file
 	print('Reading the weather:')

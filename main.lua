@@ -36,7 +36,7 @@ function lineText(text, x, y, size, family, extents, options)
 
 	-- set the font family and size of text
 	cairo_set_font_size(cr, size)
-	cairo_select_font_face(cr, family, options.bold, options.italic)
+	cairo_select_font_face(cr, family, options.italic, options.bold)
 
 	-- get the extents of the text
 	cairo_text_extents(cr, text, extents)

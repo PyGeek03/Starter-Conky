@@ -47,7 +47,7 @@ function lineText(text, x, y, size, family, text_ext, font_ext, options)
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- get the extents of the text
   cairo_text_extents(cr, text, text_ext);
@@ -149,7 +149,7 @@ function multiText(text, x, y, width, height, size, family, text_ext, font_ext, 
 
   -- set the font family and size of text
   cairo_set_font_size(cr, size);
-  cairo_select_font_face(cr, family, options.bold, options.italic);
+  cairo_select_font_face(cr, family, options.italic, options.bold);
 
   -- now get the extents
   cairo_text_extents(cr, text, text_ext);
@@ -203,11 +203,11 @@ function lines_from(file)
 end
 
 
--- reads the weather from Downloads/weather.txt
+-- reads the quote from /tmp/starter-conky/quote.tmp
 function readQuote()
-    -- read the weather file
+    -- read the quote file
     print('Reading the quote:')
-    quote_file = lines_from('Downloads/quote.cml')
+    quote_file = lines_from('/tmp/starter-conky/quote.tmp')
     -- print the line
     for index, line in pairs(quote_file) do
         _,_,key, value = line:find('([%a%d_]+):(.+)')
@@ -251,14 +251,14 @@ function conky_main(  )
     local text = ""
 
     -- date and time variables
-    local hour = tonumber(conky_parse('${time %I}'))
+    local hour = tonumber(conky_parse('${time %H}'))
     local minute = tonumber(conky_parse('${time %M}'))
     local second = tonumber(conky_parse('${time %S}'))
 
-    -- if the weather is to be update this time
+    -- if the quote is to be update this time
     local update_quote = false
 
-    -- update the weather every nine minutes
+    -- update the quote every nine minutes
     if (hour * 3600 + minute * 60 + second) % 555  <= 3 then
         update_quote = true
     end
@@ -272,7 +272,7 @@ function conky_main(  )
 
     print('Time since last update (update at 555): ' .. (hour * 3600 + minute * 60 + second) % 555)
 
-    -- read the weather
+    -- read the quote
     if update_quote then
         readQuote()
     end
