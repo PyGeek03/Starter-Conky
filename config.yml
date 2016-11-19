@@ -4,6 +4,6 @@ weather:
     longitude: 3.3520
     units: ca
 quote:
-    url: http://www.brainyquote.com/quotes_of_the_day.html
+    url: https://www.brainyquote.com/quotes_of_the_day.html
 fact:
     url: http://www.factretriever.com/
