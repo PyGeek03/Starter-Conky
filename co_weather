@@ -91,5 +91,5 @@ conky.config = {
 };
 
 conky.text = [[
-${execi 3600 weather.py}
+${execi 3600 Scripts/weather.py}
 ]];
