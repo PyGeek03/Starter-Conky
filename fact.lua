@@ -96,7 +96,7 @@ function explode(s)
   -- split the string
   for value in string.gmatch(s,"[%S]+") do
     count = count + 1;
-    print(value);
+    --print(value);
     words[count] = value;
   end
 
@@ -259,7 +259,7 @@ function conky_main(  )
     -- if the fact is to be update this time
     local update_fact = false
 
-    -- update the fact every nine minutes
+    -- update the fact every 9 minutes
     if (hour * 3600 + minute * 60 + second) % 555  <= 3 then
         update_fact = true
     end
@@ -297,18 +297,18 @@ function conky_main(  )
     local box_height = total_height
 
     -- variables positioning
-    local start_x = conky_window.width/30
-    local  start_y = 0
+    local start_x = conky_window.width/40
+    local start_y = 0
     local x = start_x
-    local y  = start_y
+    local y = start_y
 
     -- lets print the facts
-    start_y = conky_window.height/2.8;
-    box_width = total_width/2
+    start_y = conky_window.height/3 - 20;
+    box_width = total_width/1.975
     box_height = total_height/6
     cairo_set_source_rgba(cr, 1,1,1,1)
     y = start_y
-    start_x = box_width
+    start_x = box_width + 1
 
     -- cairo_rectangle(cr, start_x, start_y, box_width, box_height)
     -- cairo_stroke(cr)
@@ -319,7 +319,7 @@ function conky_main(  )
     if fact['status'] == 'FILLED' then
       -- print the fact
       options.halign = 0
-      _, y, _ = multiText(fact['fact'], start_x + box_width*(0.1) , y + box_height*(0.1), box_width*(0.90), box_height, box_height*(0.14), 'Text Me One', extents, font_ext, options);
+      _, y, _ = multiText(fact['fact'], start_x + box_width*(0.1) , y + box_height*(0.1), box_width*(0.90), box_height, box_height*(0.14), 'Noto Sans', extents, font_ext, options);
     end
 
 

@@ -251,15 +251,15 @@ function conky_main(  )
     local text = ""
 
     -- date and time variables
-    local hour = tonumber(conky_parse('${time %H}'))
+    local hour   = tonumber(conky_parse('${time %H}'))
     local minute = tonumber(conky_parse('${time %M}'))
     local second = tonumber(conky_parse('${time %S}'))
 
     -- if the quote is to be update this time
     local update_quote = false
 
-    -- update the quote every nine minutes
-    if (hour * 3600 + minute * 60 + second) % 555  <= 3 then
+    -- update the quote every 9 minutes
+    if (hour * 3600 + minute * 60 + second) % 540  <= 3 then
         update_quote = true
     end
 
@@ -270,7 +270,7 @@ function conky_main(  )
     end
 
 
-    print('Time since last update (update at 555): ' .. (hour * 3600 + minute * 60 + second) % 555)
+    print('Time since last update (update at 540): ' .. (hour * 3600 + minute * 60 + second) % 555)
 
     -- read the quote
     if update_quote then
@@ -296,13 +296,13 @@ function conky_main(  )
     local box_height = total_height
 
     -- variables positioning
-    local start_x = conky_window.width/30
-    local  start_y = 0
+    local start_x = conky_window.width/80
+    local start_y = 0
     local x = start_x
-    local y  = start_y
+    local y = start_y
 
     -- lets print the quotes
-    start_y = conky_window.height/2.8;
+    start_y = conky_window.height/3 - 20;
     box_width = total_width
     box_height = total_height/6
     cairo_set_source_rgba(cr, 1,1,1,1)
@@ -320,12 +320,13 @@ function conky_main(  )
       local which_quote = (minute*60 + second)/720
       which_quote = which_quote - which_quote%1 + 1
       -- print the quote
-      options.halign = 2
-      _, y, _ = multiText(quote[which_quote..'_quote'], start_x + box_width*(0.02) , y + box_height*(0.1), box_width*(0.46), box_height, box_height*(0.15), 'Text Me One', extents, font_ext, options);
+      options.halign = 1
+      _, y, _ = multiText(quote[which_quote..'_quote'], start_x + box_width*(0.02) , y + box_height*(0.1), box_width*(0.46), box_height, box_height*(0.15), 'Noto Sans UI', extents, font_ext, options);
       -- print the author name
       options.halign = 1
       options.width = box_width*(0.46)
-      x, y = lineText(quote[which_quote..'_author'], start_x + box_width*(0.02) , y + box_height*(0.05), box_height*(0.15), 'Roboto Light', extents, font_ext, options)
+      options.bold = 1
+      x, y = lineText("-- "..quote[which_quote..'_author'], start_x + box_width*(0.02) , y + box_height*(0.05), box_height*(0.15), 'Droid Sans', extents, font_ext, options)
 
     end
 

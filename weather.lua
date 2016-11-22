@@ -25,7 +25,7 @@ function drawImage (ir, startx, starty, width, height, path)
 	cairo_set_source_surface (ir, image, startx*(1/(width/w)), starty*(1/(height/h)));
 	cairo_paint (ir);
 
-	print('Drawing Image : ' .. path)
+	--print('Drawing Image : ' .. path)
 
 	-- all done destroy the surface
 	cairo_surface_destroy (image);
@@ -240,7 +240,7 @@ end
 function readWeather()
 	-- read the weather file
 	print('Reading the weather:')
-	weather_file = lines_from('Downloads/weather.cml')
+	weather_file = lines_from('/tmp/starter-conky/weather.tmp')
 	-- print the line
 	for index, line in pairs(weather_file) do
 		_,_,key, value = line:find('([%a%d_]+):(.+)')
@@ -291,8 +291,8 @@ function conky_main(  )
     -- if the weather is to be update this time
     local update_weather = false
 
-    -- update the weather every nine minutes
-    if (hour * 3600 + minute * 60 + second) % 555  <= 3 then
+    -- update the weather every hour
+    if (hour * 3600 + minute * 60 + second) % 3600  <= 3 then
         update_weather = true
     end
 
@@ -303,7 +303,7 @@ function conky_main(  )
     end
 
 
-    print('Time since last update (update at 555): ' .. (hour * 3600 + minute * 60 + second) % 555)
+    print('Time since last update (update at 3600): ' .. (hour * 3600 + minute * 60 + second) % 3600)
 
     -- read the weather
     if update_weather then
@@ -330,13 +330,13 @@ function conky_main(  )
 
     -- variables positioning
     local start_x = conky_window.width/30
-    local  start_y = 0
+    local start_y = 0
     local x = start_x
 	local y  = start_y
 
 	-- lets print the weather
-	start_x = conky_window.width/2
-	start_y = 0;
+	start_x = conky_window.width/2 - 1
+	start_y = 0 - 13;
 	box_width = total_width/2
 	box_height = total_height/2.8
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -352,39 +352,39 @@ function conky_main(  )
 			image_path = 'Icons/default.png'
 		end
 		local ir = cairo_create(cs);
-		x, y = drawImage(ir, start_x + box_width*(0.02), start_y + box_height*(0.05), box_height*(0.30), box_height*(0.30), image_path)
+		x, y = drawImage(ir, start_x + box_width*(0.03), start_y + box_height*(0.05), box_height*(0.30), box_height*(0.30), image_path)
 
-		-- cairo_rectangle(cr, start_x + box_width*(0.02), start_y + box_height*(0.05), box_height*(0.30), box_height*(0.30))
-		-- cairo_stroke(cr)
+		--cairo_rectangle(cr, start_x + box_width*(0.02), start_y + box_height*(0.05), box_height*(0.30), box_height*(0.30))
+		--cairo_stroke(cr)
 
 		-- print the current temperature
 		options.valign = 1
-		_, _ = lineText(weather['temperature'] .. '°' .. weather['temp_unit'], x + box_width*(0.01), start_y + box_height*(0.05), box_height*(0.20), 'Text Me One', extents, font_ext, options)
+		_, _ = lineText(weather['temperature'] .. '°' .. weather['temp_unit'], x + box_width*(0.01), start_y + box_height*(0.02), box_height*(0.20), 'Noto Sans UI', extents, font_ext, options)
 
 
 		-- print the apparent temprature
 		options.valign = 0
-		_, y = lineText('Feels like ' .. weather['feel'] .. '°' .. weather['temp_unit'] , x + box_width*(0.01), y , box_height*(0.07), 'Roboto Thin', extents, font_ext, options)
+		_, y = lineText('Feels like ' .. weather['feel'] .. '°' .. weather['temp_unit'] , x + box_width*(0.01), y , box_height*(0.07), 'Noto Sans UI', extents, font_ext, options)
 
 		-- print summary
         options.valign = 1
-        _, y = lineText(weather['1_summary'] , start_x + box_width*(0.05), y , box_height*(0.06), 'Roboto Light', extents, font_ext, options)
+        _, y = lineText(weather['1_summary'] , start_x + box_width*(0.05), y + 10, box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
 
 		-- print min and max temperatures
 		options.valign = 1
-		_, y =  lineText('Minimum ' .. weather['1_minTemp'] .. '°' .. weather['temp_unit'], start_x + box_width*(0.05), y + box_height*(0.01) , box_height*(0.06), 'Text Me One', extents, font_ext, options)
-		_, y =  lineText('Maximum ' .. weather['1_maxTemp'] .. '°' .. weather['temp_unit'], start_x + box_width*(0.05), y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
-		_, y =  lineText('Humidity ' .. tonumber(weather['humidity'])*100 .. '%', start_x + box_width*(0.05), y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
-		_, y =  lineText('Wind ' .. weather['wind'] .. weather['speed_unit'] , start_x + box_width*(0.05), y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
+		_, y =  lineText('Minimum ' .. weather['1_minTemp'] .. '°' .. weather['temp_unit'], start_x + box_width*(0.05), y + box_height*(0.01) , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
+		_, y =  lineText('Maximum ' .. weather['1_maxTemp'] .. '°' .. weather['temp_unit'], start_x + box_width*(0.05), y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
+		_, y =  lineText('Humidity ' .. tonumber(weather['humidity'])*100 .. '%', start_x + box_width*(0.05), y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
+		_, y =  lineText('Wind ' .. weather['wind'] .. weather['speed_unit'] , start_x + box_width*(0.05), y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
 
 
 		-- print a forecast for the coming days
 		x = start_x + box_width*(0.53)
 		y = start_y + box_height * (0.05)
-		_, y = multiText(weather['forecast_summery'], x  , y + box_height*(0.03), box_width*(0.45), box_height, box_height*(0.06), 'Roboto Light', extents, font_ext);
+		_, y = multiText(weather['forecast_summery'], x  , y + box_height*(0.03), box_width*(0.45), box_height, box_height*(0.06), 'Noto Sans UI', extents, font_ext);
 
 		-- print next three days
-		y = y + box_height*(0.05)
+		y = y + box_height*(0.04)
 
 		-- day 1
 		-- placeholder for the image
@@ -396,9 +396,9 @@ function conky_main(  )
 		x, tempy = drawImage(ir, x, y, box_height*(0.15), box_height*(0.15), image_path)
 		x = x + box_height*(0.05)
 		-- min and max
-		_, y = lineText(weather['2_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['2_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
+		_, y = lineText(weather['2_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['2_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
 		-- summary
-		_, y = multiText(weather['2_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Roboto Light', extents, font_ext);
+		_, y = multiText(weather['2_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Noto Sans UI', extents, font_ext);
 		-- check for y
 		if y < tempy then
 			y = tempy
@@ -407,7 +407,7 @@ function conky_main(  )
 		-- day 2
 		-- placeholder for the image
 		x = start_x + box_width*(0.53)
-		y = y + box_height*(0.05)
+		y = y + box_height*(0.02)
 		local image_path = 'Icons/' .. weather['3_icon'] .. '.png'
 		if file_exists == false then
 			image_path = 'Icons/default.png'
@@ -416,9 +416,9 @@ function conky_main(  )
 		x, tempy = drawImage(ir, x, y, box_height*(0.15), box_height*(0.15), image_path)
 		x = x + box_height*(0.05)
 		-- min and max
-		_, y = lineText(weather['3_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['3_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
+		_, y = lineText(weather['3_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['3_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
 		-- summary
-		_, y = multiText(weather['3_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Roboto Light', extents, font_ext);
+		_, y = multiText(weather['3_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Noto Sans UI', extents, font_ext);
 		-- check for y
 		if y < tempy then
 			y = tempy
@@ -427,7 +427,7 @@ function conky_main(  )
 		-- day 3
 		-- placeholder for the image
 		x = start_x + box_width*(0.53)
-		y = y + box_height*(0.05)
+		y = y + box_height*(0.02)
 		local image_path = 'Icons/' .. weather['4_icon'] .. '.png'
 		if file_exists == false then
 			image_path = 'Icons/default.png'
@@ -436,9 +436,9 @@ function conky_main(  )
 		x, tempy = drawImage(ir, x, y, box_height*(0.15), box_height*(0.15), image_path)
 		x = x + box_height*(0.05)
 		-- min and max
-		_, y = lineText(weather['4_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['4_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Text Me One', extents, font_ext, options)
+		_, y = lineText(weather['4_minTemp'] .. '°' .. weather['temp_unit'] .. ' / ' .. weather['4_maxTemp'] .. '°' .. weather['temp_unit'] , x, y , box_height*(0.06), 'Noto Sans UI', extents, font_ext, options)
 		-- summary
-		_, y = multiText(weather['4_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Roboto Light', extents, font_ext);
+		_, y = multiText(weather['4_summary'], x  , y, box_width*(0.35), box_height, box_height*(0.05), 'Noto Sans UI', extents, font_ext);
 		-- check for y
 		if y < tempy then
 			y = tempy

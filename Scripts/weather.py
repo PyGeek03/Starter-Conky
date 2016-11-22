@@ -15,7 +15,6 @@ def readConfiguration():
     config_file.close()
     return config
 
-
 def readWeather(config):
 
     # connect to forecast.io

@@ -194,21 +194,21 @@ function conky_main(  )
 
 
 	-- variables positioning
-	local start_x = conky_window.width/30
-	local  start_y = 0
-	-- cairo_rectangle(cr, start_x, start_y, box_width, box_height)
+	local start_x = 0--conky_window.width/30
+	local start_y = 0
+	
 	-- cairo_stroke(cr)
 
 	local x = start_x
-	local y  = start_y
+	local y = start_y
 
 
 
 	-- ################################################################################
 	-- DATE TIME
 	-- ################################################################################
-	start_x = conky_window.width/40
-	start_y = 0
+	start_x = 0 - 30
+	start_y = 0 - 20
 	box_width = total_width/2
 	box_height = total_height/2.8
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -218,7 +218,6 @@ function conky_main(  )
 	-- date and time variables
 	local hour = conky_parse('${time %I}')
 	local minute = conky_parse('${time %M}')
-	local second = conky_parse('${time %S}')
 	local part = conky_parse('${time %p}')
 	local day = conky_parse('${time %d}')
 	local month = conky_parse('${time %B}')
@@ -227,12 +226,12 @@ function conky_main(  )
 	-- clock
 	options.halign = 2
 	options.width = box_width
-	x, y = lineText(hour..":"..minute..":"..second.." "..part, start_x, start_y + box_height/2, box_height/3, "Text Me One", extents, options)
+	x, y = lineText(hour..":"..minute.." "..part, start_x, start_y + box_height/2, box_height/3, "Roboto Regular", extents, options)
 
 	-- date
 	options.halign = 0
 	options.valign = 1
-	lineText(month.." "..day..", "..year, x + box_width/50, start_y + box_height/2 + box_height/25, box_height/7, "Poiret One", extents, options)
+	lineText(" "..month.." "..day..", "..year, x + box_width/50, start_y + box_height/2 + box_height/15, box_height/7, "Poiret One", extents, options)
 
 
 
@@ -241,7 +240,7 @@ function conky_main(  )
 	-- ################################################################################
 
 	start_x = conky_window.width/40
-	start_y = total_height*(0.55)
+	start_y = total_height*(0.58)
 	box_width = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -261,14 +260,14 @@ function conky_main(  )
 	x, y = lineText("CPU", start_x + box_width/20, start_y + box_height/15, box_height/10, "Poiret One", extents, options)
 
 	-- cores percentage usage
-	local no_of_cores = 2
+	local no_of_cores = 4
 	for i = 1,no_of_cores do
-		local name = "core "..i
+		local name = "core "..(i-1)
 		local value = trim1(conky_parse("${top cpu "..i.."}"))
 		if value == nil then
 			value = 0
 		end
-		x, y = lineText(name..": "..value.."%", start_x + box_width/14, y + box_height/50, box_height/20, "Text Me One", extents, options)
+		x, y = lineText(name..": "..value.."%", start_x + box_width/14, y + box_height/50, box_height/20, "Roboto Regular", extents, options)
 	end
 
 	-- top ten processes
@@ -289,8 +288,8 @@ function conky_main(  )
 	-- ################################################################################
 
 	start_x = conky_window.width/40 + total_width*(0.26)
-	start_y = total_height*(0.55)
-	box_width = total_width*(0.22)
+	start_y = total_height*(0.58)
+	box_width  = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
 
@@ -304,20 +303,20 @@ function conky_main(  )
 	-- download speed
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('download:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
-	local download = trim1(conky_parse("${downspeed ppp0}"))
+	_, _ = lineText('download:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
+	local download = trim1(conky_parse("${downspeed wlo1}"))
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(download.."/s", start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(download.."/s", start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 	-- upload speed
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('upload:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
-	local download = trim1(conky_parse("${upspeed ppp0}"))
+	_, _ = lineText('upload:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
+	local download = trim1(conky_parse("${upspeed wlo1}"))
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(download.."/s", start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(download.."/s", start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 
 
@@ -340,12 +339,12 @@ function conky_main(  )
 	y = y + box_height/40
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('/', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	_, _ = lineText('/', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 	local used = trim1(conky_parse("${fs_used /}"))
 	local total = trim1(conky_parse("${fs_size /}"))
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(used).."/"..trim1(total), start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(trim1(used).."/"..trim1(total), start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 	-- root meter
 	lineMeter(start_x+box_width/20, y + box_height/30, box_width - box_width/10, tonumber(conky_parse("${fs_used_perc /}")))
@@ -354,12 +353,12 @@ function conky_main(  )
 	y = y + box_height/20
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('/home', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	_, _ = lineText('/home', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 	local used = trim1(conky_parse("${fs_used /home}"))
 	local total = trim1(conky_parse("${fs_size /home}"))
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(used).."/"..trim1(total), start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(trim1(used).."/"..trim1(total), start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 	-- root meter
 	lineMeter(start_x+box_width/20, y + box_height/30, box_width - box_width/10, tonumber(conky_parse("${fs_used_perc /home}")))
@@ -367,11 +366,11 @@ function conky_main(  )
 
 
 	-- ################################################################################
-	-- Power
+	-- Battery
 	-- ################################################################################
 
 	start_x = conky_window.width/40 + total_width*(0.52)
-	start_y = total_height*(0.55)
+	start_y = total_height*(0.58)
 	box_width = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -379,16 +378,16 @@ function conky_main(  )
 	-- heading
 	options.valign = 1
 	options.halign = 0
-	x, y = lineText("Power", start_x + box_width/20, start_y + box_height/15, box_height/10, "Poiret One", extents, options)
+	x, y = lineText("Battery", start_x + box_width/20, start_y + box_height/15, box_height/10, "Poiret One", extents, options)
 
 	-- battery status
 	options.halign = 1
 	options.valign = 0
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(conky_parse("${battery C178}")), start_x, y + box_height/18 + box_height/120, box_height/18, 'Text Me One', extents, options)
-
+	--x, y = lineText(trim1(conky_parse("${battery C178}")), start_x, y + box_height/18 + box_height/120, box_height/18, 'Roboto Regular', extents, options)
+	x, y = lineText(trim1(conky_parse("${battery}")), start_x, y + box_height/18 + box_height/120, box_height/18, 'Roboto Regular', extents, options)
 	-- battery meter
-	lineMeter(start_x+box_width/20, y + box_height/30, box_width - box_width/10, tonumber(conky_parse("${battery_percent C178}")))
+	lineMeter(start_x+box_width/20, y + box_height/30, box_width - box_width/10, tonumber(conky_parse("${battery_percent}")))
 
 
 
@@ -397,7 +396,7 @@ function conky_main(  )
 	-- ################################################################################
 
 	start_x = conky_window.width/40 + total_width*(0.52)
-	start_y = y + box_height/15
+	start_y = y + 10
 	box_width = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -412,19 +411,19 @@ function conky_main(  )
 	-- write speed
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('write:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	_, _ = lineText('write:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(conky_parse("${diskio_write}"))..'/s', start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(trim1(conky_parse("${diskio_write}"))..'/s', start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 	-- read speed
 	options.halign = 0
 	options.valign = 0
-	_, _ = lineText('read:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	_, _ = lineText('read:', start_x + box_width/20, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 	local download = trim1(conky_parse("${diskio_read}"))
 	options.halign = 1
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(conky_parse("${diskio_read}"))..'/s', start_x, y + box_height/20 + box_height/120, box_height/20, 'Text Me One', extents, options)
+	x, y = lineText(trim1(conky_parse("${diskio_read}"))..'/s', start_x, y + box_height/20 + box_height/120, box_height/20, 'Roboto Regular', extents, options)
 
 
 
@@ -433,7 +432,7 @@ function conky_main(  )
 	-- ################################################################################
 
 	start_x = conky_window.width/40 + total_width*(0.52)
-	start_y = y + box_height/36
+	start_y = y + 1
 	box_width = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -447,7 +446,7 @@ function conky_main(  )
 	options.halign = 1
 	options.valign = 0
 	options.width = box_width - box_width/18
-	x, y = lineText(trim1(conky_parse("${uptime}")), start_x, y + box_height/18 + box_height/120, box_height/18, 'Text Me One', extents, options)
+	x, y = lineText(trim1(conky_parse("${uptime}")), start_x, y + box_height/18 + box_height/120, box_height/18, 'Noto Sans', extents, options)
 
 
 
@@ -456,7 +455,7 @@ function conky_main(  )
 	-- ################################################################################
 
 	start_x = conky_window.width/40 + total_width*(0.78)
-	start_y = total_height*(0.55)
+	start_y = total_height*(0.58)
 	box_width = total_width*(0.22)
 	box_height = total_height*(0.45)
 	cairo_set_source_rgba(cr, 1,1,1,1)
@@ -474,7 +473,7 @@ function conky_main(  )
 	local name = "swap "
 	local value = trim1(conky_parse("${swapperc}"))
 	options.width = box_width - box_width/15
-	x, y = lineText(name..": "..value.."%", start_x, y + box_height/50, box_height/20, "Text Me One", extents, options)
+	x, y = lineText(name..": "..value.."%", start_x, y + box_height/50, box_height/20, "Roboto Regular", extents, options)
 
 	-- top ten processes
 	y = y + box_height/18 + box_height/20

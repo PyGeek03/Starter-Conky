@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /home/pygeek03/bin/Starter-Conky
 mkdir /tmp/starter-conky
 
 function update
