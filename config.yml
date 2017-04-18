@@ -1,9 +1,9 @@
 weather:
-    key: Replace-This-STring-WIth-KEY
-    latitude: 6.6018
-    longitude: 3.3520
+    key: [Your-API-Key]
+    latitude: 10.7469
+    longitude: 106.6345
     units: ca
 quote:
     url: https://www.brainyquote.com/quotes_of_the_day.html
 fact:
-    url: http://www.factretriever.com/
+    url: https://www.howtogeek.com/
