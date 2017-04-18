@@ -1,5 +1,8 @@
 conky.config = {
 
+-- Specify how many seconds before each update
+    update_interval = 900,
+
 -- Use Xft (anti-aliased font and stuff)
 	use_xft = true,
 
@@ -10,7 +13,7 @@ conky.config = {
 
 -- Create own window instead of using desktop (required in nautilus)
 	own_window = true,
-	own_window_transparent = true,
+    own_window_transparent = true,
 	own_window_type = 'desktop',
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	own_window_argb_visual = true,

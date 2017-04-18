@@ -1,39 +1,39 @@
 conky.config = {
 
 -- Use Xft (anti-aliased font and stuff)
-	use_xft = true,
+    use_xft = true,
 
-	font = 'Liberation Mono:bold:size=10',
+    font = 'Liberation Mono:bold:size=10',
 
 -- Alpha of Xft font. Must be a value at or between 1 and 0
-	xftalpha = 1,
+    xftalpha = 1,
 
 -- Create own window instead of using desktop (required in nautilus)
-	own_window = true,
-	own_window_transparent = true,
-	own_window_type = 'desktop',
-	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-	own_window_argb_visual = true,
+    own_window = true,
+    own_window_transparent = true,
+    own_window_type = 'desktop',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = true,
 
 -- Use the Xdbe extension? (eliminates flicker)
 -- It is highly recommended to use own window with this one so double buffer won't be so big
-	double_buffer = true,
+    double_buffer = true,
 
-	draw_shades = false,
+    draw_shades = false,
 
-	draw_outline = false,
+    draw_outline = false,
 
 -- Draw borders around text
-	draw_borders = false,
+    draw_borders = false,
 
 -- Border stippling (dashing) in pixels
-	stippled_borders = 0,
+    stippled_borders = 0,
 
 -- Border width in pixels
-	border_width = 0,
+    border_width = 0,
 
 -- Draw borders around graphs?
-	draw_graph_borders = true,
+    draw_graph_borders = true,
 
 -- Default colors and also border colors
 --default_shade_color white
@@ -43,36 +43,36 @@ conky.config = {
 -- Substitute N by a digit between 0 and 9, inclusively.
 -- When specifying the color value in hex, omit the leading hash (#)
 -- Light blue
-	color0 = '#467f77',
+    color0 = '#467f77',
 
 -- size of window
-	minimum_width = 1366, minimum_height = 768,
+    minimum_width = 1366, minimum_height = 768,
 
 -- Aligned position on screen, may be top_left, top_right, top_middle, bottom_left, bottom_right, bottom_middle, middle_left, middle_middle, middle_right, or none
-	alignment = 'top_left',
+    alignment = 'top_left',
 
 -- Subtract (file system) buffers from used memory?
-	no_buffers = true,
+    no_buffers = true,
 
 -- Boolean value, if true, text is rendered in upper case
-	uppercase = false,
+    uppercase = false,
 
 -- number of cpu samples to average
 -- set to 1 to disable averaging
 -- The number of samples to average for CPU monitoring
-	cpu_avg_samples = 2,
+    cpu_avg_samples = 2,
 
 -- The number of samples to average for net data
-	net_avg_samples = 2,
+    net_avg_samples = 2,
 
 -- Force UTF8? requires XFT
-	override_utf8_locale = true,
+    override_utf8_locale = true,
 
 -- Adds spaces around certain objects to stop them from moving other things around.
 -- Arguments are left, right, and none (default).
 -- The old true/false values are deprecated and default to right/none respectively.
 -- Note that this only helps if you are using a mono font, such as Bitstream Vera Sans Mono
-	use_spacer = 'right',
+    use_spacer = 'right',
 
 -- Size of the standard text buffer (default is 256 bytes).
 -- This buffer is used for intermediary text, such as individual lines, output from $exec vars,
@@ -80,12 +80,12 @@ conky.config = {
 -- Increasing the size of this buffer can drastically reduce Conky's performance,
 -- but will allow for more text display per variable.
 -- The size of this buffer cannot be smaller than the default value of 256 bytes
-	text_buffer_size = 2048,
+    text_buffer_size = 2048,
 
 -- -- Lua load -- #
-	lua_load = 'main.lua',
-	lua_draw_hook_pre = 'main',
-	lua_startup_hook = 'setup',
+    lua_load = 'main.lua',
+    lua_draw_hook_pre = 'main',
+    lua_startup_hook = 'setup',
 
 };
 
