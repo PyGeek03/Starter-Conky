@@ -19,24 +19,18 @@ def readQuote(config):
     page = requests.get(config['quote']['url'])
     # make the soup
     soup = BeautifulSoup(page.text, "lxml")
-
     # lets find the quotes
     data = dict()
-    quotes = soup(class_ = ['boxyPaddingBig'])
-    for i in range(0,18):
-        data[str(i+1) + '_quote'] = unicode(quotes[i].a.text).strip()
-        try:
-            data[str(i+1) + '_author'] = unicode(quotes[i].div.text).strip()
-        except AttributeError:
-            pass
-        else:
-            pass
-
+    quotes  = soup.find_all(title="view quote")
+    authors = soup.find_all(title="view author")
+    for i in range(0,5):
+        data[str(i+1) + '_quote'] = unicode(quotes[i].text).strip()
+        data[str(i+1) + '_author'] = unicode(authors[i].text).strip()
     return data
 
 
 def writeQuote(data):
-    # open the file for writitng
+    # open the file for writing
     quote_file = open('/tmp/starter-conky/quote.tmp', 'w')
     # write the quotes
     for key in data:
