@@ -319,7 +319,7 @@ function conky_main(  )
       -- decide which quote to print
 --      local which_quote = (minute*60 + second)/720
 --      which_quote = which_quote - which_quote%1 + 1
-      local which_quote = math.random(0,15)
+      local which_quote = math.random(1,5)
       -- print the quote
       options.halign = 1
       _, y, _ = multiText(quote[which_quote..'_quote'], start_x + box_width*(0.02) , y + box_height*(0.1), box_width*(0.46), box_height, box_height*(0.15), 'Noto Sans UI', extents, font_ext, options);
