@@ -19,30 +19,28 @@ def readFact(config):
     page = requests.get(config['fact']['url'])
     # make the soup
     soup = BeautifulSoup(page.text, "lxml")
-
     # get the fact
     data = dict()
-    for i in range(0,1000):
-        data['fact'] = unicode(soup(class_='sliderText')[0].text).strip()
-        data['fact'] = re.sub(r'\s+', r' ', data['fact'])
+    for i in range(0,2):
+        data[str(i+1) + '_fact'] = re.sub(r'\s+', r' ', unicode(soup(class_='glossaryhomebox')[i].text).strip())
 
     # lets find the quotes
     return data
 
 
 def writeFact(data):
-    # open the file for writitng
+    # open the file for writing
     fact_file = open('/tmp/starter-conky/fact.tmp', 'w')
-    # write the fact
-    fact_file.write('fact:' + data['fact'].encode('utf-8'))
-    fact_file.write('\nstatus:' + data['status'])
+    # write the facts
+    for key in data:
+        fact_file.write(key + ':' + data[key].encode('utf-8') + '\n')
     # close the file
     fact_file.close()
 
 
 # read the configuration file
 config = readConfiguration()
-# read the quotes
+# read the facts
 data = readFact(config)
 data['status'] = 'FILLED'
 # write them to a file
