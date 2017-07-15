@@ -1,9 +1,0 @@
-weather:
-    key: [Your-API-Key]
-    latitude: 10.7469
-    longitude: 106.6345
-    units: ca
-quote:
-    url: https://www.brainyquote.com/quotes_of_the_day.html
-fact:
-    url: https://www.howtogeek.com/
