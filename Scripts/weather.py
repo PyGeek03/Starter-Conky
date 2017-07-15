@@ -63,7 +63,7 @@ def readWeather(config):
 
 
 def writeWeather(data):
-    # open the file for writitng
+    # open the file for writing
     weather_file = open('/tmp/starter-conky/weather.tmp', 'w')
     # write the weather
     for key in data:

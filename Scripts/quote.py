@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 import requests
 import yaml
+import re
 
 def readConfiguration():
     # open the configuration file in read mode
@@ -24,8 +25,8 @@ def readQuote(config):
     quotes  = soup.find_all(title="view quote")
     authors = soup.find_all(title="view author")
     for i in range(0,5):
-        data[str(i+1) + '_quote'] = unicode(quotes[i].text).strip()
-        data[str(i+1) + '_author'] = unicode(authors[i].text).strip()
+        data[str(i+1) + '_quote']  = re.sub(r'\s+', r' ', unicode(quotes[i].text).strip())
+        data[str(i+1) + '_author'] = re.sub(r'\s+', r' ', unicode(authors[i].text).strip())
     return data
 
 

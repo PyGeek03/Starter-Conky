@@ -15,17 +15,19 @@ def readConfiguration():
 
 
 def readFact(config):
-    # get the quote page
+    # get the fact page
     page = requests.get(config['fact']['url'])
     # make the soup
     soup = BeautifulSoup(page.text, "lxml")
-    # get the fact
-    data = dict()
-    for i in range(0,2):
-        data[str(i+1) + '_fact'] = re.sub(r'\s+', r' ', unicode(soup(class_='glossaryhomebox')[i].text).strip())
+    # get the facts
+    did_you_know = soup.find("div", {"class":"dyk-content"})
+    tech_term    = soup.find("div", {"class":"dtt-content"})
 
-    # lets find the quotes
-    return data
+    facts = dict()
+    facts['1_fact'] = re.sub(r'\s+', r' ', unicode(tech_term.text).strip())
+    facts['2_fact'] = re.sub(r'\s+', r' ', unicode(did_you_know.text).strip())
+
+    return facts
 
 
 def writeFact(data):
