@@ -15,10 +15,17 @@ def readConfiguration():
     config_file.close()
     return config
 
-def readWeather(config):
 
+def readAPI():
+    # open the API file in read mode
+    API_file = open('API', 'r')
+    API = API_file.readline().rstrip()
+    API_file.close()
+    return API
+
+def readWeather(config, API):
     # connect to forecast.io
-    forecast = forecastio.load_forecast(config['weather']['key'], config['weather']['latitude'], config['weather']['longitude'], units=config['weather']['units'])
+    forecast = forecastio.load_forecast(API, config['weather']['latitude'], config['weather']['longitude'], units=config['weather']['units'])
 
     # get the current weather
     current = forecast.currently()
@@ -74,9 +81,10 @@ def writeWeather(data):
 
 # read the configuration
 config = readConfiguration()
+API    = readAPI()
 
 # read the weatther
-data = readWeather(config)
+data = readWeather(config, API)
 
 # change the status
 data['status'] = 'FILLED'
