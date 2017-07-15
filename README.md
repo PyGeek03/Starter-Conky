@@ -45,7 +45,9 @@ For parsing html
 The main configuration is in config.yml (not complete yet)
 
 ## Weather
-You will need an api key from [forcast.io](http://forecast.io). Go to <http://https://developer.forecast.io/>, register and you will see the api and the bottom of the page. Copy and paste it in the **config.yml** file.
+You will need an api key from [forcast.io](http://forecast.io). Go to <http://https://developer.forecast.io/>, register and you will see the api and the bottom of the page.
+
+Create a new file called **API** and paste the API in there.
 
 We also need the latitude and longitude, for to [forecast.io](http://forecast.io) and search for your city. Now in the url you will see the latitude and longitude, copy and paste them in the **config.yml** file.
 
