@@ -359,12 +359,12 @@ function conky_main(  )
 
 		-- print the current temperature
 		options.valign = 1
-		_, _ = lineText(weather['temperature'] .. '°' .. weather['temp_unit'], x + box_width*(0.01), start_y + box_height*(0.02), box_height*(0.20), 'Noto Sans UI', extents, font_ext, options)
+		_, _ = lineText(weather['temperature'] .. '°' .. weather['temp_unit'], x + box_width*(0.01), start_y + box_height*(0.02), box_height*(0.20), 'Roboto Light', extents, font_ext, options)
 
 
 		-- print the apparent temprature
 		options.valign = 0
-		_, y = lineText('Feels like ' .. weather['feel'] .. '°' .. weather['temp_unit'] , x + box_width*(0.01), y , box_height*(0.07), 'Noto Sans UI', extents, font_ext, options)
+		_, y = lineText('Feels like ' .. weather['feel'] .. '°' .. weather['temp_unit'] , x + box_width*(0.01), y , box_height*(0.07), 'Roboto Light', extents, font_ext, options)
 
 		-- print summary
         options.valign = 1

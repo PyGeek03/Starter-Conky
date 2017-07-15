@@ -322,12 +322,12 @@ function conky_main(  )
       local which_quote = math.random(1,5)
       -- print the quote
       options.halign = 1
-      _, y, _ = multiText(quote[which_quote..'_quote'], start_x + box_width*(0.02) , y + box_height*(0.1), box_width*(0.46), box_height, box_height*(0.15), 'Noto Sans UI', extents, font_ext, options);
+      _, y, _ = multiText(quote[which_quote..'_quote'], start_x + box_width*(0.02) , y + box_height*(0.1), box_width*(0.46), box_height, box_height*(0.15), 'Roboto Light', extents, font_ext, options);
       -- print the author name
       options.halign = 1
       options.width = box_width*(0.46)
       options.bold = 1
-      x, y = lineText("-- "..quote[which_quote..'_author'], start_x + box_width*(0.02) , y + box_height*(0.05), box_height*(0.15), 'Droid Sans', extents, font_ext, options)
+      x, y = lineText("-- "..quote[which_quote..'_author'], start_x + box_width*(0.02) , y + box_height*(0.05), box_height*(0.15), 'Roboto', extents, font_ext, options)
 
     end
 

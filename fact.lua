@@ -321,7 +321,7 @@ function conky_main(  )
       which_fact = math.random(1,2)
       -- print the fact
       options.halign = 0
-      _, y, _ = multiText(fact[which_fact..'_fact'], start_x + box_width*(0.1) , y + box_height*(0.1), box_width*(0.90), box_height, box_height*(0.14), 'Noto Sans', extents, font_ext, options);
+      _, y, _ = multiText(fact[which_fact..'_fact'], start_x + box_width*(0.1) , y + box_height*(0.1), box_width*(0.90), box_height, box_height*(0.14), 'Roboto Light', extents, font_ext, options);
     end
 
 

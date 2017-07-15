@@ -196,7 +196,7 @@ function conky_main(  )
 	-- variables positioning
 	local start_x = 0--conky_window.width/30
 	local start_y = 0
-	
+
 	-- cairo_stroke(cr)
 
 	local x = start_x
@@ -231,7 +231,7 @@ function conky_main(  )
 	-- date
 	options.halign = 0
 	options.valign = 1
-	lineText(" "..month.." "..day..", "..year, x + box_width/50, start_y + box_height/2 + box_height/15, box_height/7, "Poiret One", extents, options)
+	lineText("    "..month.." "..day..", "..year, x + box_width/50, start_y + box_height/2 + box_height/15, box_height/7, "Poiret One", extents, options)
 
 
 
