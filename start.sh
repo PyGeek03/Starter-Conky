@@ -1,6 +1,9 @@
 #!/bin/bash
 cd /home/pygeek03/bin/Starter-Conky
-mkdir /tmp/starter-conky
+
+if ! [ -d /tmp/starter-conky ]; then
+    mkdir /tmp/starter-conky
+fi
 
 function update
 {
