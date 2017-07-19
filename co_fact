@@ -94,5 +94,5 @@ conky.config = {
 };
 
 conky.text = [[
-${execi 43200 Scripts/fact.py}
+${execi 21600 Scripts/fact.py}
 ]];
