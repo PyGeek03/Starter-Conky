@@ -24,11 +24,7 @@ def readFact(config):
     tech_term    = soup.find("div", {"class":"dtt-content"})
 
     facts = dict()
-    if len(tech_term) <= 512:
-        facts['1_fact'] = re.sub(r'\s+', r' ', unicode(tech_term.text).strip())
-    else:
-        facts['1_fact'] = re.sub(r'\s+', r' ', unicode(did_you_know.text).strip())
-
+    facts['1_fact'] = re.sub(r'\s+', r' ', unicode(tech_term.text).strip())
     facts['2_fact'] = re.sub(r'\s+', r' ', unicode(did_you_know.text).strip())
 
     return facts
